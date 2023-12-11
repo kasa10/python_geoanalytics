@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+        <h1 style="color: white">Регистрация</h1>
+    </header>
+
+{% include '_menu.html' %}
+
+    <div class="register-container">
+
+{% if registration_success %}
+    <h3>Пользователь {{ username }} успешно зарегистрирован!</h3>
+    <script>
+    setTimeout(function() {
+        window.location.href = "{{ url_for('login') }}";
+    }, 3000);
+    </script>
+{% endif %}
+
+        <h1>Регистрация</h1>
+        <form action="{{ url_for('register') }}" method="post">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Подтвердите пароль:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <label for="user_type">Тип пользователя:</label>
+            <select id="user_type" name="user_type" required>
+                <option value="existingBusinessOwner">Владелец существующего бизнеса</option>
+                <option value="newEntrepreneur">Новый предприниматель</option>
+            </select>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+
+        <p>Уже зарегистрированы? <a href="{{ url_for('login') }}">Войти</a></p>
+    </div>
+</body>
+</html>

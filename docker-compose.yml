@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: localhost #mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 11061978
+      MYSQL_DB: geosurf
+    command: ["sh", "-c", "sleep 10 && python app.py"]
+
+  mysql:
+    image: mysql:latest
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: 11061978
+      MYSQL_DATABASE: geosurf
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:rw

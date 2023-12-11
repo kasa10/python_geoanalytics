@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход geosurf</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 style="color: white">Вход</h1>
+    </header>
+
+    {% include '_menu.html' %}
+
+    <div class="login">
+        <div class="login-triangle"></div>
+
+        <h2 class="login-header">Авторизация</h2>
+
+        <form class="login-container" method="POST" action="{{ url_for('login') }}">
+            <p><input type="text" name="username" placeholder="Имя пользователя" required></p>
+            <p><input type="password" name="password" placeholder="Пароль" required></p>
+            <p><input type="submit" value="Войти"></p>
+        </form>
+    </div>
+</body>
+</html>

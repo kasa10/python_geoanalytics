@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница нового предпринимателя</title>
+    <!-- Подключаем свои стили -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 style="color: white">Страница нового предпринимателя</h1>
+    </header>
+
+    {% include '_menu.html' %}
+
+    <div class="container">
+        <h2>Добро пожаловать, {{ session['username'] }}!</h2>
+
+        <div class="description">
+            <p>Выберите, какую информацию вы хотели бы предоставить, чтобы получить рекомендацию:</p>
+        </div>
+
+        <form class="form-container" method="post" action="{{ url_for('new_entrepreneur_page') }}">
+            <div class="form-group">
+                <label class="label" for="business_category">Категория бизнеса:</label>
+                <select class="input-field" id="business_category" name="business_category">
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="submit-btn" type="submit">Получить рекомендацию по категории</button>
+        </form>
+
+        <form class="form-container" method="post" action="{{ url_for('new_entrepreneur_page') }}">
+            <div class="form-group">
+                <label class="label" for="business_location">Местоположение бизнеса:</label>
+                <input class="input-field" type="text" id="business_location" name="business_location">
+            </div>
+
+            <button class="submit-btn" type="submit">Получить рекомендацию по местоположению</button>
+        </form>
+    <p>Страница нового предпринимателя предоставляет вам уникальную возможность получить персонализированные рекомендации для успешного старта бизнеса.
+        Выберите один из двух путей: укажите желаемую категорию бизнеса для получения местоположения,
+        исходя из ваших интересов, или укажите местоположение, чтобы получить предложения о наиболее
+        подходящих категориях бизнеса. Наш инновационный сервис использует современные методы анализа данных,
+        чтобы предоставить вам релевантные и персонализированные рекомендации.</p>
+    </div>
+</body>
+</html>

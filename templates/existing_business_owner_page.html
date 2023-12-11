@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница существующего бизнеса</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 style="color: white">Ваш бизнес</h1>
+    </header>
+
+    {% include '_menu.html' %}
+
+    <div class="container">
+        <h2>Добро пожаловать, {{ session['username'] }}!</h2>
+
+        <div class="description">
+            <p>На этой странице вы можете увидеть информацию об удовлетворенности ваших клиентов и предсказания оттока.</p>
+        </div>
+
+        <div class="satisfaction-info">
+            <h3>Информация об удовлетворенности клиентов:</h3>
+            <p>Процент клиентов, которые точно останутся: {{ stay_percentage }}%</p>
+        </div>
+
+        <div class="churn-predictions">
+            <h3>Предсказания оттока:</h3>
+            {% if churned_users_data %}
+                <p>Клиенты которые могут уйти</p>
+                <ul>
+                    {% for user_id in churned_users_data %}
+                        <li>{{ user_id }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Нет данных об оттоке.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
